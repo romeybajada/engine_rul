@@ -23,6 +23,7 @@ dev = ["pytest", "pandera", "ruff"]
 [project.scripts]
 rul-train = "engine_rul.train:main"
 rul-validate = "engine_rul.validate:main"
+rul-fetch = "engine_rul.fetch:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

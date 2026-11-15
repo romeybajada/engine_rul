@@ -20,7 +20,8 @@ make install
 ## Run
 
 ```bash
-rul-validate            # data contract on the raw files: exit 0 if valid (downloads the data on first use)
+rul-fetch               # downloads the whole dataset once into data/raw/cmapss (run this first)
+rul-validate            # data contract on the raw files: exit 0 if valid
 rul-train               # trains, scores the FD001 test files, writes models/model.joblib and reports/train_metrics.json
 python scripts/data_check.py   # the counts behind the diary's data-check table -> reports/data_check.json
 make test               # unit tests (no data needed)
