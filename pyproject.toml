@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "engine_rul"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "lightgbm",
+    "scikit-learn",
+    "joblib",
+    "pyyaml",
+    "kagglehub",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pandera", "ruff"]
+
+[project.scripts]
+rul-train = "engine_rul.train:main"
+rul-validate = "engine_rul.validate:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 140
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E702"]   # the notebook's one-line "a; b" kept verbatim in packaged code

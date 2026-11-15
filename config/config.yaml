@@ -1,0 +1,38 @@
+# Non-secret settings. The CAPITALS of the notebook's Section 0, unchanged.
+seed: 3217
+kaggle_handle: "behrad3d/nasa-cmaps"
+train_set: "FD001"            # the model's fleet
+shift_set: "FD002"            # the planned shift (six regimes)
+kb_set: "FD004"               # the knowledge-base ablation
+rul_cap: 125                  # piecewise-linear target: "125 or more cycles left" counts as healthy
+window: 30                    # cycles in the rolling trend window
+baseline_cycles: 30           # each engine's first cycles = its healthy commissioning baseline
+n_folds: 5                    # group k-fold, by engine
+check_every: 10               # cycles between planning reviews (one week of flying, an assumption)
+entry_weeks: 20               # the cohort enters service at a random week in [0, entry_weeks)
+hangar_slots_per_week: 4      # engines the base can induct per week
+cost_unscheduled_eur: 300000  # unscheduled removal after an in-service failure (assumption, task C3)
+cost_wasted_cycle_eur: 1500   # one cycle of on-wing life thrown away (assumption, task C3)
+stream_engines: 100           # FD002 engines replayed as the new fleet
+n_eval_draws: 20              # fresh fleet draws for evaluating T and A
+
+lgb_params:
+  n_estimators: 300
+  learning_rate: 0.05
+  num_leaves: 31
+  min_child_samples: 40
+  subsample: 0.8
+  subsample_freq: 1
+  colsample_bytree: 0.7
+  reg_lambda: 2.0
+  verbose: -1
+  n_jobs: 1
+
+# Paths (relative to the project root). DATA_DIR in the environment overrides data_dir.
+data_dir: "data"
+model_path: "models/model.joblib"
+report_path: "reports/train_metrics.json"
+
+# The frozen holdout: SHA-256 of test_FD001.txt + RUL_FD001.txt, concatenated (matches the notebook's 5c2b2cf46966…)
+holdout_files: ["CMaps/test_FD001.txt", "CMaps/RUL_FD001.txt"]
+holdout_sha256: "5c2b2cf469669e043e972de397538f97783753fddf6777265102a2ee61260563"

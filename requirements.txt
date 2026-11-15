@@ -1,0 +1,11 @@
+# Exact versions the notebook was built with (its first cell prints them). Full lock file comes in Step 3.
+numpy==2.5.4
+pandas==3.1.0
+lightgbm==4.7.0
+scikit-learn==1.9.1
+pyarrow==26.0.1
+joblib==1.6.0
+PyYAML==6.0.3
+kagglehub==1.0.3
+pytest==9.2.0
+pandera==0.36.0
