@@ -53,6 +53,7 @@ rul-fetch                                              # the build copies data/r
 docker build --platform linux/amd64 -t engine-rul:0.1 .
 docker run -d --name rul-api --platform linux/amd64 -p 8000:8000 engine-rul:0.1
 docker run --rm --platform linux/amd64 engine-rul:0.1 cat reports/train_metrics.json   # the official numbers
+python scripts/skew_test.py                            # container vs package on the same rows -> reports/skew_test.json
 ```
 
 - **Training inside the build:** test RMSE 13.165872, PHM 238.0455 on x86_64. This matches ADR 0002's reference and passes its gate.
@@ -61,6 +62,9 @@ docker run --rm --platform linux/amd64 engine-rul:0.1 cat reports/train_metrics.
   - Raw data: 45 MB.
   - Model: 0.85 MB.
 - **Build time:** 95 s on an Apple M3 under x86 emulation, including 9.5 s of training.
+- **Skew test:** it sends 494 windows (100 FD001 test engines) to the container and compares with the package's own prediction inside the same image.
+  - Result: 0 mismatches, max difference 0.0.
+  - A planted float32 conversion in the serving path gives 75 mismatches (max 1.65 cycles), so the test fails.
 
 ## Results (Apple M3, arm64)
 
