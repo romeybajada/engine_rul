@@ -44,6 +44,24 @@ make serve              # POST /rul on http://localhost:8000 (docs at /docs)
   - On the FD001 test rows, 1.3% of predictions differ, by at most 1.6 cycles.
   - The official score moves from 12.9262 to 12.9256 RMSE, inside ADR 0002's gate.
 
+## Container
+
+The image trains the model while it is built, on the official platform (ADR 0002), and then serves it.
+
+```bash
+rul-fetch                                              # the build copies data/raw, so fetch first
+docker build --platform linux/amd64 -t engine-rul:0.1 .
+docker run -d --name rul-api --platform linux/amd64 -p 8000:8000 engine-rul:0.1
+docker run --rm --platform linux/amd64 engine-rul:0.1 cat reports/train_metrics.json   # the official numbers
+```
+
+- **Training inside the build:** test RMSE 13.165872, PHM 238.0455 on x86_64. This matches ADR 0002's reference and passes its gate.
+- **Image size:** 1.1 GB on disk, 260 MB compressed.
+  - Python libraries: 647 MB (pyarrow 170, scipy 139, pandas 81, scikit-learn 49, numpy 70).
+  - Raw data: 45 MB.
+  - Model: 0.85 MB.
+- **Build time:** 95 s on an Apple M3 under x86 emulation, including 9.5 s of training.
+
 ## Results (Apple M3, arm64)
 
 | | Notebook (build machine) | This package |

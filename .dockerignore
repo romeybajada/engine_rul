@@ -1,0 +1,13 @@
+.venv
+.env
+.git
+models
+reports
+notebooks
+tests
+__pycache__
+.pytest_cache
+.ruff_cache
+.DS_Store
+# the image builds its own cache from the raw files
+data/processed
