@@ -1,4 +1,4 @@
-.PHONY: install data test train
+.PHONY: install data test train serve
 
 install:
 	python3 -m pip install -r requirements.txt
@@ -12,3 +12,6 @@ test:
 
 train:
 	rul-train
+
+serve:
+	uvicorn engine_rul.service:app --port 8000

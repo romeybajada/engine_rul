@@ -15,10 +15,12 @@ dependencies = [
     "joblib",
     "pyyaml",
     "kagglehub",
+    "fastapi",
+    "uvicorn",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "pandera", "ruff"]
+dev = ["pytest", "pandera", "ruff", "httpx"]
 
 [project.scripts]
 rul-train = "engine_rul.train:main"

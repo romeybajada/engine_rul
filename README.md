@@ -24,10 +24,25 @@ rul-fetch               # downloads the whole dataset once into data/raw/cmapss 
 rul-validate            # data contract on the raw files: exit 0 if valid
 rul-train               # trains, scores the FD001 test files, writes models/model.joblib and reports/train_metrics.json
 python scripts/data_check.py   # the counts behind the diary's data-check table -> reports/data_check.json
-make test               # unit tests (no data needed)
+make test               # unit tests (the service tests that need the model skip until rul-train has run)
+make serve              # POST /rul on http://localhost:8000 (docs at /docs)
 ```
 
 `DATA_DIR` in the environment overrides where the data lives (default `data/`).
+
+## Serve
+
+`POST /rul` is stateless (D-04 Option A): the client sends the engine's last flights, the service keeps no history.
+
+- **Request:** `engine_id` and `flights`, 1–30 rows of `cycle`, `setting1..3`, `s1..s21`.
+  - Cycles must be in order, with no gaps or repeats.
+  - At cycle *c*, the request must hold the last min(30, *c*) flights. The rolling features count rows, not cycles.
+  - Values must be finite numbers, with no unknown fields.
+- **Response:** `rul` (in cycles, capped at 125 in training), the `cycle` it refers to, and `model_version` (the first 12 hex digits of the bundle's SHA-256).
+- **422** is returned for an incomplete window, or for a flight regime that the training fleet never flew (for example FD002's).
+- **Window vs full history:** the features agree to within 1e-14, but that rounding can flip a near-tied tree split.
+  - On the FD001 test rows, 1.3% of predictions differ, by at most 1.6 cycles.
+  - The official score moves from 12.9262 to 12.9256 RMSE, inside ADR 0002's gate.
 
 ## Results (Apple M3, arm64)
 
