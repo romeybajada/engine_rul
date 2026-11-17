@@ -13,6 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from engine_rul.baseline import normalise
 from engine_rul.config import load_config
 from engine_rul.data import assign_regime
+from engine_rul.db import save_prediction
 from engine_rul.features import features
 from engine_rul.model import load_bundle
 
@@ -100,5 +101,7 @@ def rul(req: RulRequest):
         raise HTTPException(422, str(e) or "a flight matches no known flight regime")
     if not np.isfinite(pred):
         raise HTTPException(500, "the model returned a non-finite prediction")
-    return RulResponse(engine_id=req.engine_id, cycle=req.flights[-1].cycle, rul=pred,
+    cycle = req.flights[-1].cycle
+    save_prediction(req.engine_id, cycle, pred, app.state.version)
+    return RulResponse(engine_id=req.engine_id, cycle=cycle, rul=pred,
                        rul_cap=app.state.bundle["rul_cap"], model_version=app.state.version)

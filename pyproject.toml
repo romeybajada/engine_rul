@@ -17,6 +17,8 @@ dependencies = [
     "kagglehub",
     "fastapi",
     "uvicorn",
+    "psycopg[binary]",
+    "prometheus-client",
 ]
 
 [project.optional-dependencies]

@@ -1,4 +1,4 @@
-# Full lock: every package, hidden dependencies included, from a clean Python 3.12 venv (2026-11-15; serving packages added 2026-11-16).
+# Full lock: every package, hidden dependencies included, from a clean Python 3.12 venv (2026-11-15; serving packages added 2026-11-16, monitoring 2026-11-17).
 # Direct dependencies match the notebook's printed versions (numpy 2.5.4, pandas 3.1.0, lightgbm 4.7.0, scikit-learn 1.9.1).
 annotated-doc==0.0.6
 annotated-types==0.8.0
@@ -25,7 +25,10 @@ packaging==26.3
 pandas==3.1.0
 pandera==0.36.0
 pluggy==1.7.0
+prometheus_client==0.26.0
 protobuf==7.36.2
+psycopg==3.3.9
+psycopg-binary==3.3.9
 pyarrow==26.0.1
 pydantic==2.14.3
 pydantic_core==2.50.4

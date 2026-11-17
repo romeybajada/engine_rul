@@ -1,0 +1,34 @@
+# The API and its prediction log (D-06). Needs DB_PASSWORD in .env (copy env.example).
+#   docker compose up -d --build
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: rul
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      POSTGRES_DB: rul
+    volumes:
+      - db-data:/var/lib/postgresql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "rul", "-d", "rul"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    platform: linux/amd64          # the official platform (ADR 0002)
+    image: engine-rul:0.1
+    ports:
+      - "8000:8000"
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DATABASE_URL: postgresql://rul:${DB_PASSWORD}@db:5432/rul
+    depends_on:
+      db:
+        condition: service_healthy
+
+# The log lives in its own volume, so it survives the API container being replaced for a new model
+volumes:
+  db-data:

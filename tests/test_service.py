@@ -121,3 +121,13 @@ def test_window_scores_stay_within_the_reproduction_gate(cmapss):
     assert abs(a["RMSE"] - w["RMSE"]) <= 0.01
     assert abs(a["PHM score (sum)"] - w["PHM score (sum)"]) <= 0.5
     assert pd.Series(fd.engine.unique()).equals(pd.Series(fd.engine[is_last].values))   # same engine order on both sides
+
+
+def test_a_broken_database_never_stops_a_prediction(monkeypatch, caplog):
+    # D-06: logging must not break serving. Nothing listens on port 1, so the connection fails at once.
+    from engine_rul.db import save_prediction
+    monkeypatch.setenv("DATABASE_URL", "postgresql://rul:x@127.0.0.1:1/rul?connect_timeout=1")
+    save_prediction("E1", 10, 42.0, "abc")
+    assert "Could not store the prediction" in caplog.text
+    monkeypatch.delenv("DATABASE_URL")
+    save_prediction("E1", 10, 42.0, "abc")     # not configured: silently skipped

@@ -66,6 +66,20 @@ python scripts/skew_test.py                            # container vs package on
   - Result: 0 mismatches, max difference 0.0.
   - A planted float32 conversion in the serving path gives 75 mismatches (max 1.65 cycles), so the test fails.
 
+## Prediction log
+
+Every prediction is stored in PostgreSQL (D-06). Postgres runs in its own container, and the log lives in a named volume.
+
+```bash
+cp env.example .env          # then set DB_PASSWORD
+docker compose up -d --build
+docker compose exec db psql -U rul -d rul -c "select * from predictions order by id desc limit 5"
+```
+
+- **Columns:** `created_at`, `engine_id`, `cycle`, `rul` and `model_version`.
+- **Rejected requests (422) are not logged.**
+- **If the database is down, predictions are still returned**, and the failure is written to the API's log.
+
 ## Results (Apple M3, arm64)
 
 | | Notebook (build machine) | This package |
