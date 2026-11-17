@@ -131,3 +131,20 @@ def test_a_broken_database_never_stops_a_prediction(monkeypatch, caplog):
     assert "Could not store the prediction" in caplog.text
     monkeypatch.delenv("DATABASE_URL")
     save_prediction("E1", 10, 42.0, "abc")     # not configured: silently skipped
+
+
+@needs_model
+def test_rejected_flights_still_reach_the_metrics(client, cmapss):
+    # D-07: the regime is counted at the door, before the regime check; otherwise FD002 would be invisible
+    from prometheus_client import REGISTRY
+    def sample(name, **labels):
+        return REGISTRY.get_sample_value(name, labels) or 0.0
+    e = cmapss[cmapss.engine == "FD002-test-001"]
+    regime = str(e.regime.iloc[-1])
+    assert regime != "0"
+    before = sample("rul_input_flights_total", regime=regime), sample("rul_requests_total", status="422")
+    assert client.post("/rul", json=request_for(e)).status_code == 422
+    assert client.post("/rul", json={"engine_id": "E1", "flights": []}).status_code == 422   # rejected by validation
+    assert sample("rul_input_flights_total", regime=regime) == before[0] + 1
+    assert sample("rul_requests_total", status="422") == before[1] + 2
+    assert "rul_request_latency_seconds_bucket" in client.get("/metrics").text

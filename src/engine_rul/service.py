@@ -2,12 +2,14 @@
 import hashlib
 import logging
 import os
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Response
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from engine_rul.baseline import normalise
@@ -15,6 +17,7 @@ from engine_rul.config import load_config
 from engine_rul.data import assign_regime
 from engine_rul.db import save_prediction
 from engine_rul.features import features
+from engine_rul.metrics import LATENCY, REQUESTS, count_regime
 from engine_rul.model import load_bundle
 
 logger = logging.getLogger(__name__)
@@ -87,14 +90,32 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="engine-rul", lifespan=lifespan)
 
 
+@app.middleware("http")
+async def count_and_time(request: Request, call_next):
+    """Every POST /rul, including those rejected by validation before the endpoint runs."""
+    if request.url.path != "/rul":
+        return await call_next(request)
+    t0 = time.perf_counter()
+    response = await call_next(request)
+    LATENCY.observe(time.perf_counter() - t0)
+    REQUESTS.labels(str(response.status_code)).inc()
+    return response
+
+
 @app.get("/health")
 def health():
     return {"status": "ok", "model_version": app.state.version}
 
 
+@app.get("/metrics")
+def metrics():
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
+
+
 @app.post("/rul", response_model=RulResponse)
 def rul(req: RulRequest):
     flights = pd.DataFrame([f.model_dump() for f in req.flights])
+    count_regime(flights.tail(1))                   # before the regime check below (D-07)
     try:
         pred = predict_window(app.state.bundle, flights)
     except (ValueError, AssertionError) as e:     # assign_regime asserts when a row matches no known regime
