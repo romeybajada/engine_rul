@@ -1,5 +1,9 @@
-# The API and its prediction log (D-06). Needs DB_PASSWORD in .env (copy env.example).
-#   docker compose up -d --build
+# The API, its prediction log (D-06), and Prometheus + Grafana (monitoring/, as in Session 4).
+# Needs DB_PASSWORD in .env (copy env.example).
+#   docker compose up -d --build        then Grafana on http://localhost:3000
+include:
+  - monitoring/compose.yaml
+
 services:
   db:
     image: postgres:18

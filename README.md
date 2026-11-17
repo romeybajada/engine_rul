@@ -80,6 +80,22 @@ docker compose exec db psql -U rul -d rul -c "select * from predictions order by
 - **Rejected requests (422) are not logged.**
 - **If the database is down, predictions are still returned**, and the failure is written to the API's log.
 
+## Monitoring
+
+`docker compose up -d --build` also starts Prometheus (scraping `GET /metrics` every 5 s) and Grafana on
+http://localhost:3000, with the "Engine RUL Service" dashboard. This is the Session 4 stack, reused from the Gozo Channel exercise.
+
+```bash
+python3 monitoring/replay.py --fleet FD001     # the model's own fleet: 0% outside regime 0
+python3 monitoring/replay.py --fleet FD002     # six regimes: the envelope panel jumps to ~85%
+```
+
+| Metric | What it is |
+|---|---|
+| `rul_requests_total{status}` | requests by HTTP status, including those rejected by validation |
+| `rul_request_latency_seconds` | latency histogram, for p50 and p95 |
+| `rul_input_flights_total{regime}` | regime of each request's newest flight, counted before the regime check (D-07) |
+
 ## Results (Apple M3, arm64)
 
 | | Notebook (build machine) | This package |
