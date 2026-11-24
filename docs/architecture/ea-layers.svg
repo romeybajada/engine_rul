@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="566" viewBox="0 0 1100 566" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5b6475"/></marker></defs>
+<rect width="1100" height="566" fill="#ffffff"/>
+<text x="40" y="38" font-size="17" font-weight="bold" fill="#1d2433" text-anchor="start" >The RUL service sits in one layer but touches all four</text>
+<rect x="40" y="66" width="1020" height="96" rx="8" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3"/>
+<text x="58" y="108" font-size="15" font-weight="bold" fill="#1d2433" text-anchor="start" >Business</text>
+<text x="58" y="128" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Why, and who?</text>
+<rect x="40" y="180" width="1020" height="96" rx="8" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3"/>
+<text x="58" y="222" font-size="15" font-weight="bold" fill="#1d2433" text-anchor="start" >Data</text>
+<text x="58" y="242" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >What information?</text>
+<rect x="40" y="294" width="1020" height="96" rx="8" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3"/>
+<text x="58" y="336" font-size="15" font-weight="bold" fill="#1d2433" text-anchor="start" >Application</text>
+<text x="58" y="356" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Which systems?</text>
+<rect x="40" y="408" width="1020" height="96" rx="8" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3"/>
+<text x="58" y="450" font-size="15" font-weight="bold" fill="#1d2433" text-anchor="start" >Technology</text>
+<text x="58" y="470" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Running on what?</text>
+<line x1="637.0" y1="145.0" x2="637.0" y2="197.0" stroke="#1f5fbf" stroke-width="1.5" stroke-dasharray="4 4"/>
+<line x1="637.0" y1="259.0" x2="637.0" y2="311.0" stroke="#1f5fbf" stroke-width="1.5" stroke-dasharray="4 4"/>
+<line x1="637.0" y1="373.0" x2="637.0" y2="425.0" stroke="#1f5fbf" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="226" y="83.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="238" y="107.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Certifying staff</text>
+<text x="238" y="127.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Decide fitness to fly</text>
+<rect x="361.2" y="92.0" width="116.80000000000001" height="17" rx="8.5" fill="#8a2f7a"/>
+<text x="419.6" y="104.0" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="0.4">HUMAN-IN-THE-LOOP</text>
+<rect x="506" y="83.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="518" y="107.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >CAMO planners</text>
+<text x="518" y="127.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Act on its output: 4 slots a week</text>
+<rect x="641.2" y="92.0" width="116.80000000000001" height="17" rx="8.5" fill="#8a2f7a"/>
+<text x="699.6" y="104.0" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="0.4">HUMAN-IN-THE-LOOP</text>
+<rect x="786" y="83.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.3"/>
+<text x="798" y="107.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Service owner (me)</text>
+<text x="798" y="127.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Acts on drift alerts</text>
+<rect x="226" y="197.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="238" y="221.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Engine-health feed</text>
+<text x="238" y="241.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >One snapshot per engine per flight</text>
+<rect x="506" y="197.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.3"/>
+<text x="518" y="221.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Model artefact</text>
+<text x="518" y="241.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Trained on linux/amd64, versioned</text>
+<rect x="786" y="197.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.3"/>
+<text x="798" y="221.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Prediction log</text>
+<text x="798" y="241.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Every answer with its model version</text>
+<rect x="226" y="311.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="238" y="335.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Planning system</text>
+<text x="238" y="355.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Sends each engine's last 30 flights</text>
+<rect x="380.4" y="320.0" width="97.60000000000001" height="17" rx="8.5" fill="#9a5b00"/>
+<text x="429.2" y="332.0" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="0.4">BATCH · WEEKLY</text>
+<rect x="506" y="311.0" width="262" height="62" rx="6" fill="#e8f0fb" stroke="#1f5fbf" stroke-width="2"/>
+<text x="518" y="335.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >RUL service</text>
+<text x="518" y="355.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >POST /rul over the engine_rul package</text>
+<rect x="711.6" y="320.0" width="46.400000000000006" height="17" rx="8.5" fill="#0b7a5c"/>
+<text x="734.8" y="332.0" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="0.4">ONLINE</text>
+<rect x="786" y="311.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.3"/>
+<text x="798" y="335.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Grafana dashboard</text>
+<text x="798" y="355.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >p95 and regime share</text>
+<rect x="226" y="425.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="238" y="449.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >CAMO hosting</text>
+<text x="238" y="469.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Feed and planning system</text>
+<rect x="506" y="425.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.3"/>
+<text x="518" y="449.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >API container</text>
+<text x="518" y="469.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Model baked in at build</text>
+<rect x="786" y="425.0" width="262" height="62" rx="6" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.3"/>
+<text x="798" y="449.0" font-size="13.5" font-weight="bold" fill="#1d2433" text-anchor="start" >Postgres, Prometheus</text>
+<text x="798" y="469.0" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >Log volume and metrics scrape</text>
+<line x1="489" y1="342.0" x2="504" y2="342.0" stroke="#5b6475" stroke-width="1.4" marker-end="url(#head)"/>
+<line x1="769" y1="342.0" x2="784" y2="342.0" stroke="#5b6475" stroke-width="1.4" marker-end="url(#head)"/>
+<rect x="40" y="528" width="28" height="16" rx="4" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.3"/>
+<text x="76" y="540" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >built in Entry 1</text>
+<rect x="190" y="528" width="28" height="16" rx="4" fill="#ffffff" stroke="#c9ced8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="226" y="540" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >existing estate</text>
+<rect x="350.0" y="528" width="46.400000000000006" height="17" rx="8.5" fill="#0b7a5c"/>
+<text x="373.2" y="540" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="0.4">ONLINE</text>
+<rect x="404.4" y="528" width="97.60000000000001" height="17" rx="8.5" fill="#9a5b00"/>
+<text x="453.2" y="540" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="0.4">BATCH · WEEKLY</text>
+<rect x="509.99999999999994" y="528" width="116.80000000000001" height="17" rx="8.5" fill="#8a2f7a"/>
+<text x="568.4" y="540" font-size="9.5" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="0.4">HUMAN-IN-THE-LOOP</text>
+<text x="638.8" y="540" font-size="12" font-weight="normal" fill="#5b6475" text-anchor="start" >capability patterns (Session 1, §3.3)</text>
+</svg>

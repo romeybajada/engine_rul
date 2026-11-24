@@ -103,4 +103,4 @@ python3 monitoring/replay.py --fleet FD002     # six regimes: the envelope panel
 | Test RMSE (last cycle, 100 engines) | 13.2 | 12.9 |
 | Test PHM score (sum) | 238 | 226 |
 | OOF RMSE (capped, all cycles) | 12.3 | 12.3 |
-| Training time (OOF + final fit) | — | 6.8 s |
+| Training time (OOF + final fit) | — | 6.5 s |
